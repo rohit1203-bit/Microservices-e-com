@@ -1,0 +1,21 @@
+server.port: 9000
+
+jwt.security-key: "38792F423F4528482B4D6251655468576D5A7134743677397A24432646294A40"
+
+spring:
+  application:
+    name: auth-server
+
+  datasource:
+    url: jdbc:postgresql://${E_COMMERCE_SERVICE_HOST:localhost}:5432/
+    username: sushil
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate.format_sql: true
+      database: postgresql
+      database-platform: org.hibernate.dialect.PostgreSQLDialect

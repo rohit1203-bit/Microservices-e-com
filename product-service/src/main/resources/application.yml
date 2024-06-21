@@ -1,0 +1,19 @@
+server.port: 8100
+
+spring:
+  application:
+    name: product
+
+  datasource:
+    url: jdbc:postgresql://${E_COMMERCE_SERVICE_HOST}:5432/
+    username: sushil
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate.format_sql: true
+      database: postgresql
+      database-platform: org.hibernate.dialect.PostgreSQLDialect

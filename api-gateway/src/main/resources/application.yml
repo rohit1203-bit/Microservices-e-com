@@ -1,0 +1,35 @@
+server.port: 8080
+
+jwt.security-key: "38792F423F4528482B4D6251655468576D5A7134743677397A24432646294A40"
+
+spring:
+  cloud:
+    gateway:
+      routes:
+#       AUTH REQUESTS
+        - id: auth-routes
+          uri: http://${AUTH_SERVER_SERVICE_HOST:localhost}:9000
+          predicates:
+            - Path=/api/v1/auth/users/**
+          filters:
+            - ValidateFilter
+#       PRODUCT REQUESTS
+        - id: product-routes
+          uri: http://${PRODUCT_SERVICE_HOST:localhost}:8100
+          predicates:
+            - Path=/api/v1/products/**
+#       ORDER REQUESTS
+        - id: order-routes
+          uri: http://${ORDER_SERVICE_HOST:localhost}:8300
+          predicates:
+            - Path=/api/v1/orders/**
+          filters:
+            - ValidateFilter
+#       CART REQUESTS
+        - id: cart-routes
+          uri: http://${ORDER_SERVICE_HOST:localhost}:8300
+          predicates:
+            - Path=/api/v1/cart/**
+          filters:
+            - ValidateFilter
+

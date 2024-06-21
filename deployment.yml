@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: e-commerce
+  labels:
+    app: e-commerce
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: e-commerce
+  template:
+    metadata:
+      labels:
+        app: e-commerce
+    spec:
+      containers:
+        - name: e-commerce
+          image: postgres
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: sushil
+            - name: POSTGRES_PASSWORD
+              value: password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: e-commerce
+spec:
+  selector:
+    app: e-commerce
+  type: LoadBalancer
+  ports:
+    - port: 5432
+      targetPort: 5432
+      nodePort: 30400
+
+
